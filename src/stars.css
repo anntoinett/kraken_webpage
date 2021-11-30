@@ -1,0 +1,172 @@
+.star:nth-child(1) {
+	top: 30%;
+	left: 10%;
+	font-size: 27px;
+	animation: 20s across infinite;
+   animation-delay: 2s;
+  }
+  .star:nth-child(2) {
+	top: 20%;
+	left: 20%;
+	font-size: 22px;
+	animation: 30s up infinite;
+  }
+  .star:nth-child(3) {
+	top: 30%;
+	left: 30%;
+	font-size: 14px;
+	animation: 20s up infinite;
+  }
+  .star:nth-child(4) {
+	top: 40%;
+	left: 10%;
+	font-size: 28px;
+	animation: 39s up infinite;
+  }
+  .star:nth-child(5) {
+	top: 55%;
+	left: 20%;
+	font-size: 11px;
+	animation: 37s across infinite;
+  }
+  .star:nth-child(6) {
+	top: 90%;
+	left: 60%;
+	font-size: 11px;
+	animation: 40s across infinite;
+  }
+  .star:nth-child(7) {
+	top: 70%;
+	left: 70%;
+	font-size: 20px;
+	animation: 36s up infinite;
+  }
+  .star:nth-child(8) {
+	top: 80%;
+	left: 80%;
+	font-size: 23px;
+	animation: 26s up infinite;
+  }
+  .star:nth-child(9) {
+	top: 31%;
+	left: 40%;
+	font-size: 16px;
+	animation: 33s across infinite;
+  }
+  .star:nth-child(10) {
+	top: 90%;
+	left: 25%;
+	font-size: 20px;
+	animation: 29s across infinite;
+  }
+  .star:nth-child(11) {
+	top: 90%;
+	left: 90%;
+	font-size: 19px;
+	animation: 28s up infinite;
+  }
+  .star:nth-child(12) {
+	top: 80%;
+	left: 20%;
+	font-size: 25px;
+	animation: 28s across infinite;
+  }
+  .star:nth-child(13) {
+	top: 10%;
+	left: 30%;
+	font-size: 19px;
+	animation: 21s across infinite;
+  }
+  .star:nth-child(14) {
+	top: 55%;
+	left: 85%;
+	font-size: 25px;
+	animation: 32s up infinite;
+  }
+  .star:nth-child(15) {
+	top: 20%;
+	left: 50%;
+	font-size: 21px;
+	animation: 34s up infinite;
+  }
+  .star:nth-child(16) {
+	top: 60%;
+	left: 30%;
+	font-size: 24px;
+	animation: 32s up infinite;
+  }
+  .star:nth-child(17) {
+	top: 60%;
+	left: 40%;
+	font-size: 19px;
+	animation: 22s across infinite;
+  }
+  .star:nth-child(18) {
+	top: 80%;
+	left: 30%;
+	font-size: 12px;
+	animation: 31s up infinite;
+  }
+  .star:nth-child(19) {
+	top: 25%;
+	left: 65%;
+	font-size: 18px;
+	animation: 26s across infinite;
+  }
+  .star:nth-child(20) {
+	top: 20%;
+	left: 70%;
+	font-size: 12px;
+	animation: 36s across infinite;
+  }
+  .star:nth-child(21) {
+	top: 75%;
+	left: 50%;
+	font-size: 25px;
+	animation: 30s across infinite;
+  }
+  .star:nth-child(22) {
+	top: 80%;
+	left: 70%;
+	font-size: 17px;
+	animation: 35s across infinite;
+  }
+  .star:nth-child(23) {
+	top: 90%;
+	left: 50%;
+	font-size: 20px;
+	animation: 34s up infinite;
+  }
+  .star:nth-child(24) {
+	top: 10%;
+	left: 90%;
+	font-size: 25px;
+	animation: 28s across infinite;
+  }
+  .star:nth-child(25) {
+	top: 25%;
+	left:90%;
+	font-size: 29px;
+	animation: 26s across infinite;
+  }
+ 
+
+ 
+  @keyframes across {
+	0%, 100% {
+	  transform: translateX(0);
+    
+	}
+	50% {
+	  transform: translateX(-250px);
+	}
+  }
+
+  @keyframes up {
+	0%, 100% {
+	  transform: translateY(0);
+	}
+	50% {
+	  transform: translateY(-200px);
+	}
+  }
