@@ -4,6 +4,8 @@ import './index.css';
 import './vis-network.min.css';
 import './stars.css';
 import App from "./App";
+import swal from 'sweetalert';
+import { waitFor } from "@testing-library/react";
 
 const foo = {foot: "aa"}
 ReactDOM.render(<App props={foo}/>, document.getElementById("root"));

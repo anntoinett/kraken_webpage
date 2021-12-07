@@ -24,13 +24,13 @@ const Graph = ({data_from_db}) => {
   const areaShape = "dot";
   const pubShape = "dot";
 
-  var titleElement = document.createElement("div");
-  titleElement.style.border = "1px solid gray";
-  titleElement.style.height = "30em";
-  titleElement.style.width = "30em";
-  var titleElementInner = document.createElement("div");
-  titleElementInner.innerHTML = "Antoni Ligęza"
-  titleElement.appendChild(titleElementInner);
+  var descriptionElement = document.createElement("div");
+  descriptionElement.style.border = "1px solid gray";
+  descriptionElement.style.height = "30em";
+  descriptionElement.style.width = "30em";
+  var descriptionElementInner = document.createElement("div");
+  descriptionElementInner.innerHTML = "Antoni Ligęza"
+  descriptionElement.appendChild(descriptionElementInner);
 
   var nodeTypeColors = {"teamMember": memberColor, "kraken": pubColor, "publication": pubColor, "areaOfResearch": areaOfResearchColor};
 
@@ -41,37 +41,37 @@ const Graph = ({data_from_db}) => {
       // ,
       // fixed: {x: true}
   },
-title: titleElement},
+description: "Antoni Ligęza"},
     { id: 0, image: 'http://127.0.0.1:8887/logo_wyciete_new.png', shape:'image',size:70, label: '', nodeType: 'kraken', color: {
       background: memberColor,
       border: edgesColor
             
-  }, title: "KRaKEn is a research group led by Professor Antoni Ligęza. It is composed mainly of scientists working in the Department of Applied Computer Science, Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering, AGH University of Science and Technology, as well as doctoral students and team collaborators. Between 2009 and 2019, the members of the group cooperated within other teams and projects. The current composition and research profile of KRaKEn was established in 2019, after some of the group’s members returned to Poland upon completion of their doctorates and post-doctoral project abroad."},
+  }, description: "KRaKEn is a research group led by Professor Antoni Ligęza. It is composed mainly of scientists working in the Department of Applied Computer Science, Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering, AGH University of Science and Technology, as well as doctoral students and team collaborators. Between 2009 and 2019, the members of the group cooperated within other teams and projects. The current composition and research profile of KRaKEn was established in 2019, after some of the group’s members returned to Poland upon completion of their doctorates and post-doctoral project abroad."},
     { id: 2, image: 'http://127.0.0.1:8887/KJ.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
       background: memberColor,
       border: edgesColor
   } ,
-  title: "Krystian Jobczyk"},
+  description: "Krystian Jobczyk"},
     { id: 3, image: 'http://127.0.0.1:8887/WTA.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
       background: memberColor,
       border: edgesColor
   } ,
-  title: "Weronika T. Adrian"},
+  description: "Weronika T. Adrian"},
     { id: 4, image: 'http://127.0.0.1:8887/KK.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
       background: memberColor,
       border: edgesColor
   },
-  title: "Krzysztof Kluza" },
+  description: "Krzysztof Kluza" },
     { id: 5, image: 'http://127.0.0.1:8887/MA.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
       background: memberColor,
       border: edgesColor
   } ,
-  title: "Marek Adrian"},
+  description: "Marek Adrian"},
     { id: 6, image: 'http://127.0.0.1:8887/PW.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
       background: memberColor,
       border: edgesColor
   },
-  title: "Piotr Wiśniewski"}
+  description: "Piotr Wiśniewski"}
   ];
 
   var areaOfResearchNodes = [{ id: 7, shape: areaShape,size:30, label: 'Area \nof research', hidden: true, nodeType: 'areaOfResearch', color: {
@@ -421,23 +421,23 @@ title: titleElement},
   //   var allNodes = nodes.get({ returnType: "Object" });
   //   //var clickedId = nodes.get(e.nodes[0]).id;
 
-  //   var titleElement = document.createElement("div");
-  //   titleElement.style.border = "1px solid gray";
-  //   titleElement.style.height = "10em";
-  //   titleElement.style.width = "10em";
-  //   var titleElementInner = document.createElement("div");
-  //   titleElementInner.innerHTML = allNodes[clickedId].title
-  //   titleElement.appendChild(titleElementInner);
+  //   var descriptionElement = document.createElement("div");
+  //   descriptionElement.style.border = "1px solid gray";
+  //   descriptionElement.style.height = "10em";
+  //   descriptionElement.style.width = "10em";
+  //   var descriptionElementInner = document.createElement("div");
+  //   descriptionElementInner.innerHTML = allNodes[clickedId].description
+  //   descriptionElement.appendChild(descriptionElementInner);
 
 
-  //   nodes.update({id: clickedId, title: titleElement})
+  //   nodes.update({id: clickedId, description: descriptionElement})
   // });
   
   network.current.on("hoverNode",function (e) {
     var allNodes = nodes.get({ returnType: "Object" });
 
-    //console.log(allNodes[e.node].title);
-    var description = (allNodes[e.node].title === undefined) ? "" : allNodes[e.node].title;
+    //console.log(allNodes[e.node].description);
+    var description = (allNodes[e.node].description === undefined) ? "" : allNodes[e.node].description;
     document.getElementsByClassName("text-content")[0].innerHTML = description;
 });
 

@@ -2,6 +2,17 @@ h1, p {
     font-family: Lato;
   }
 
+  .swal-text {
+    padding: 10px;
+    color: #61534e;
+  }
+  .swal-title{
+    background-image: url("title_tlo2.png") ;
+    background-repeat: no-repeat;
+    padding: 20px 20px 20px 20px;
+    background-size: cover;
+    text-align: left;
+  }
 
 .App-logo {
 height: 40vmin;
@@ -31,6 +42,24 @@ html, body{
     color: white;
 }
 
+
+.rect {
+  height: 92%;
+  width: 92%;
+  /* background-image: linear-gradient(to top, #18d6f8, #0e6ab6); */
+  background-image: url("tlo.jpg");
+  /* transform: rotate(0deg) translate(1%, 6%); */
+  border-radius: 50px 50px 50px 50px;
+  position: relative;
+  /* z-index: 10; */
+  box-shadow: 10px 10px rgba(65, 49, 49, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* padding: 10px; */
+  color:white;
+}
+
 .line{
   left: 50%;
   width: 40%;
@@ -42,70 +71,93 @@ html, body{
   }
 
 .text-rect{
-    top: 50%;
-    left: 50%;
-    height: 92%;
-    width: 89%;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  height: 94%;
+  width: 88%;
+  background: rgba(86, 101, 115, 0.2);
+  border-radius: 50px 50px 50px 50px;
+  border: 4px solid #18d6f8;
+  font-size: calc(7px + (0.5vw));
+  text-align: center;
+  position: relative;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
+  padding-left: 10px;
     /* margin-top: 6.5vh; */
-    background: white;
-    border-radius: 50px 50px 50px 50px;
-    border: 4px solid #18d6f8;
     /* opacity: 0.99; */
-    position: relative;
-    /* z-index: 100; */
-    box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    /* z-index: 100;
     padding-top: 0px;
-    font-size: calc(7px + (0.5vw));
-    text-align: center;
     transform: translate(-50%, -50%);
-
     overflow: hidden;
     flex-direction: column;     /* stack flex items vertically */
-    justify-content: center;  
-    align-items: center;        /* center items horizontally, in this case */
+    /* justify-content: center;  
+    align-items: center;        center items horizontally, in this case */
+  } 
+
+  .text-footer_new{
+    /* top: 50%; */
+    left: 50%;
+    /* margin-right: -50%; */
+    transform: translate(-50%, 0%);
+    width: 88%;
+    height: 100px;
+    background-image: url("footer_new.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: purple; */
+    border-top:8px solid #18d6f8;
+    border-bottom:8px solid #18d6f8;
+    border-left:6px solid #18d6f8;
+    border-right:6px solid #18d6f8;
+    bottom: 8vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    /* bottom: 130px;
+    height: 100px; */
+    position: absolute;
+    z-index: 100;
+    /* width: 92.5%; 
+    margin:0 auto; */
+  }
+
+  .photo-container_new{
+    border: 3px solid white;
+    /* border-left:3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white; */
+    height: 94px;
   }
 
   .title{
-    margin-top: 0;
     margin:5px auto;
+    margin-left: -10px;
+    text-transform: uppercase;
   }
 
   .text-content{
-    height: calc(100% - (160px));
+    height: calc(100% - (192px));
     width: 100%;
     text-align: left;
     overflow: scroll;
-    
+
   }
 
   .text-footer{
-    background-image: url("footer_new.png");
+    /* background-image: url("footer_new.png");
     background-repeat: no-repeat;
-    background-size: contain;
-    border-top:10px solid #18d6f8;
-    border-bottom:10px solid #18d6f8;
+    background-size: contain; */
+    /* border-top:10px solid #18d6f8;
+    border-bottom:10px solid #18d6f8; */
     height: 100px;
     margin-top: 0px;
-    margin-bottom: 10px;
-
+    margin-bottom: 0px;
   }
 
-.rect {
-    height: 92%;
-    width: 92%;
-    /* background-image: linear-gradient(to top, #18d6f8, #0e6ab6); */
-    background-image: url("tlo.jpg");
-    /* transform: rotate(0deg) translate(1%, 6%); */
-    border-radius: 50px 50px 50px 50px;
-    position: relative;
-    /* z-index: 10; */
-    box-shadow: 10px 10px rgba(65, 49, 49, 0.2);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10px;
-  }
+
 
 
 

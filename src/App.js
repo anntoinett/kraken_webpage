@@ -3,6 +3,7 @@ import './style.css';
 import Graph from './Graph';
 import './vis-network.min.css';
 import { useState } from "react";
+import './stars.css';
 
 export default function App() {
 
