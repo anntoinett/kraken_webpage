@@ -7,7 +7,7 @@ import './stars.css';
 
 export default function App() {
 
-  const [data, setData] = useState({
+  const data = useRef({
     publications: '',
     projects: '',
     events:'',
@@ -65,7 +65,7 @@ export default function App() {
   useEffect( () => {
     console.log("fetch");
 
-    var url = 'http://localhost:8080/kraken/';
+    var url = 'http://localhost:8080/krakenApi/';
 
     const fetchData = async (dataType) => {
       let response = await fetch(`${url}/${dataType}`, {method: 'get'});
@@ -80,19 +80,19 @@ export default function App() {
     };
 
     const fetchAll = async () => {
-      let publications = fetchData('teamMembers');
-      let project = fetchData('teamMembers');
-      let events = fetchData('teamMembers');
-      let subjects = fetchData('teamMembers');
+      let publications = fetchData('publications');
+      let projects = fetchData('projects');
+      let events = fetchData('events');
+      let subjects = fetchData('courses');
 
-      let values = await Promise.all([publications, project, events, subjects]);
+      let values = await Promise.all([publications, projects, events, subjects]);
       console.log(values);
-      setData({
+      data.current = {
         publications: values[0],
         projects: values[1],
         events: values[2],
         subjects: values[3]
-      });
+      };
       setView('publications');
     };  
 
@@ -119,15 +119,15 @@ export default function App() {
     switch (view) {
       case 'publications':
         // console.log('Oranges are $0.59 a pound.');
-        return {publications: data.publications}
+        return data.current.publications
       case 'projects':
-        return {projects: data.projects}
+        return data.current.projects
       case 'events':
-        return {events: data.events}
+        return data.current.events
       case 'subjects':
-        return {subjects: data.subjects}
+        return data.current.subjects
       default:
-        return {noDataYet: [""]};
+        return "";
     }
   }
 

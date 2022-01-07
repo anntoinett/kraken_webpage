@@ -1,11 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { Network } from 'vis-network';
+import { data, Network } from 'vis-network';
 import { DataSet } from 'vis-data';
 
 const Graph = ({data_from_db}) => {
-
-  console.log(data_from_db);
-
 
   const domNode = useRef(null);
   const network = useRef(null);
@@ -24,147 +21,233 @@ const Graph = ({data_from_db}) => {
   const areaShape = "dot";
   const pubShape = "dot";
 
-  var descriptionElement = document.createElement("div");
-  descriptionElement.style.border = "1px solid gray";
-  descriptionElement.style.height = "30em";
-  descriptionElement.style.width = "30em";
-  var descriptionElementInner = document.createElement("div");
-  descriptionElementInner.innerHTML = "Antoni Ligęza"
-  descriptionElement.appendChild(descriptionElementInner);
-
   var nodeTypeColors = {"teamMember": memberColor, "kraken": pubColor, "publication": pubColor, "areaOfResearch": areaOfResearchColor};
 
-  var memberNodes = [
-    { id: 1, image: 'http://127.0.0.1:8887/AL.png', shape:'circularImage',size:30, label: 'Leader', hidden: true, nodeType: 'teamMember',color: {
-      background: memberColor,
-      border: edgesColor,
-      // ,
-      // fixed: {x: true}
-  },
-description: "Antoni Ligęza"},
-    { id: 0, image: 'http://127.0.0.1:8887/logo_wyciete_new.png', shape:'image',size:70, label: '', nodeType: 'kraken', color: {
-      background: memberColor,
-      border: edgesColor
-            
-  }, description: "KRaKEn is a research group led by Professor Antoni Ligęza. It is composed mainly of scientists working in the Department of Applied Computer Science, Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering, AGH University of Science and Technology, as well as doctoral students and team collaborators. Between 2009 and 2019, the members of the group cooperated within other teams and projects. The current composition and research profile of KRaKEn was established in 2019, after some of the group’s members returned to Poland upon completion of their doctorates and post-doctoral project abroad."},
-    { id: 2, image: 'http://127.0.0.1:8887/KJ.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
-      background: memberColor,
-      border: edgesColor
-  } ,
-  description: "Krystian Jobczyk"},
-    { id: 3, image: 'http://127.0.0.1:8887/WTA.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
-      background: memberColor,
-      border: edgesColor
-  } ,
-  description: "Weronika T. Adrian"},
-    { id: 4, image: 'http://127.0.0.1:8887/KK.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
-      background: memberColor,
-      border: edgesColor
-  },
-  description: "Krzysztof Kluza" },
-    { id: 5, image: 'http://127.0.0.1:8887/MA.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
-      background: memberColor,
-      border: edgesColor
-  } ,
-  description: "Marek Adrian"},
-    { id: 6, image: 'http://127.0.0.1:8887/PW.png', shape:'circularImage',size:30, label: 'Member', hidden: true, nodeType: 'teamMember', color: {
-      background: memberColor,
-      border: edgesColor
-  },
-  description: "Piotr Wiśniewski"}
-  ];
+  var memberNodes = [];
+  var areaOfResearchNodes = [];
+  var viewTypeNodes = [];
+  var connections = [];
 
-  var areaOfResearchNodes = [{ id: 7, shape: areaShape,size:30, label: 'Area \nof research', hidden: true, nodeType: 'areaOfResearch', color: {
-    background: areaOfResearchColor,
-    border: edgesColor
-} },
-  { id: 8, shape: areaShape,size:30, label: 'Area \nof research', hidden: true, nodeType: 'areaOfResearch', color: {
-    background: areaOfResearchColor,
-    border: edgesColor
-} },
-  { id: 9, shape: areaShape,size:30, label: 'Area \nof research', hidden: true, nodeType: 'areaOfResearch', color: {
-    background: areaOfResearchColor,
-    border: edgesColor
-}}];
+  console.log(Object.keys(data_from_db)[0]);
+  console.log(data_from_db.publications);  
 
-  var publicationNodes = [{ id: 10, shape: pubShape,size:30, label: 'Publication', hidden: true, nodeType: 'publication', color: {
-    background: pubColor,
-    border: edgesColor
-} },
-  { id: 11, shape: pubShape,size:30, label: 'Publication', hidden: true, nodeType: 'publication' , color: {
-    background: pubColor,
-    border: edgesColor
-}},
-  { id: 12, shape: pubShape,size:30, label: 'Publication', hidden: true, nodeType: 'publication', color: {
-    background: pubColor,
-    border: edgesColor
-}},
-  { id: 13, shape: pubShape,size:30, label: 'Publication', hidden: true, nodeType: 'publication', color: {
-    background: pubColor,
-    border: edgesColor
-} },
-  { id: 14, shape: pubShape,size:30, label: 'Publication', hidden: true, nodeType: 'publication', color: {
-    background: pubColor,
-    border: edgesColor
-} },
-  { id: 15, shape: pubShape,size:30, label: 'Publication', hidden: true, nodeType: 'publication', color: {
-    background: pubColor,
-    border: edgesColor
-}}];
+  var chosen_view = Object.keys(data_from_db)[0];
 
-  var nodes = new DataSet(memberNodes.concat(areaOfResearchNodes, publicationNodes));
+  viewTypeNodes.push( { id: 12, image: 'http://127.0.0.1:8887/logo.png', shape:'image',size:70, label: '', nodeType: 'kraken', color: {
+    background: memberColor,
+    border: edgesColor
+}, description: "KRaKEn is a research group led by Professor Antoni Ligęza. It is composed mainly of scientists working in the Department of Applied Computer Science, Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering, AGH University of Science and Technology, as well as doctoral students and team collaborators. Between 2009 and 2019, the members of the group cooperated within other teams and projects. The current composition and research profile of KRaKEn was established in 2019, after some of the group’s members returned to Poland upon completion of their doctorates and post-doctoral project abroad."},);
 
-  var edges =  new DataSet([
-    { from: 0, to: 7 },
-    { from: 0, to: 8 },
-    { from: 0, to: 9 },
-    { from: 7, to: 12 },
-    { from: 7, to: 13 },
-    { from: 8, to: 10 },
-    { from: 8, to: 11 },
-    { from: 9, to: 14 },
-    { from: 9, to: 15 },
-    { from: 10, to: 3 },
-    { from: 10, to: 4 },
-    { from: 10, to: 5 },
-    { from: 11, to: 5 },
-    { from: 11, to: 3 },
-    { from: 12, to: 1 },
-    { from: 12, to: 2 },
-    { from: 13, to: 6 },
-    { from: 13, to: 4 },
-    { from: 14, to: 5 },
-    { from: 14, to: 6 },
-    { from: 15, to: 1 },
-    { from: 15, to: 5 },
-    { from: 15, to: 3 }
-  ]);
-
-
-  var projectNodes = [];
-
-  var eventNodes = [];
-  var subjectNodes = [];
-
-  var projectNodes = [];
+function prepare_graph_data(view){
+    if(view=='publications'){
+      for (let i = 0; i < data_from_db.publications.length; i++){
+      var pub = Object.values(data_from_db.publications)[i]
+        viewTypeNodes.push(
+          { id: pub.id, 
+            shape: pubShape,
+            size:30, 
+            label: 'Publication', 
+            hidden: true, 
+            nodeType: 'publication', 
+            color: {
+              background: pubColor,
+              border: edgesColor
+            }, 
+            name: pub.name,
+            title: pub.name,
+            year: pub.year,
+            link: pub['link'], 
+            description: pub.description
+          });
+      }
+      for (let i = 0; i < data_from_db.coauthors.length; i++){
+        var author = Object.values(data_from_db.coauthors)[i]
+        memberNodes.push(
+      { id: author.id, 
+        image: 'http://127.0.0.1:8887/' + author.photo_file, 
+        shape:'circularImage',
+        size:30, 
+        label: 'Member', 
+        hidden: true, 
+        nodeType: 'teamMember',
+        color: {
+          background: memberColor,
+          border: edgesColor,
+        },
+        name: author.name,
+        title: author.name,
+        description: author.description,
+        academic_title: author.academic_title
+      });
+    }
+    }
+    else if(view==='projects'){
+      for (let i = 0; i < data_from_db.projects.length; i++){
+        var project = Object.values(data_from_db.projects)[i]
+          viewTypeNodes.push(
+            { id: project.id, 
+              shape: pubShape,
+              size:30, 
+              label: 'Project', 
+              hidden: true, 
+              nodeType: 'publication', 
+              color: {
+                background: pubColor,
+                border: edgesColor
+              }, 
+              name: project.name,
+              title: project.name,
+              year: project.year,
+              link: project['link'], 
+              description: project.description
+            });
+        }
+        for (let i = 0; i < data_from_db.contributors.length; i++){
+          var contributor = Object.values(data_from_db.contributors)[i]
+          memberNodes.push(
+        { id: contributor.id, 
+          image: 'http://127.0.0.1:8887/' + contributor.photo_file, 
+          shape:'circularImage',
+          size:30, 
+          label: 'Member', 
+          hidden: true, 
+          nodeType: 'teamMember',
+          color: {
+            background: memberColor,
+            border: edgesColor,
+          },
+          name: contributor.name,
+          title: contributor.name,
+          description: contributor.description,
+          academic_title: contributor.academic_title
+        });
+      }
+    }
+    else if(view==='events'){
+      for (let i = 0; i < data_from_db.events.length; i++){
+        var event = Object.values(data_from_db.events)[i]
+          viewTypeNodes.push(
+            { id: event.id, 
+              shape: pubShape,
+              size:30, 
+              label: 'Event', 
+              hidden: true, 
+              nodeType: 'publication', 
+              color: {
+                background: pubColor,
+                border: edgesColor
+              }, 
+              name: event.name,
+              title: event.name,
+              year: event.year,
+              link: event['link'], 
+              description: event.description
+            });
+        }
+        for (let i = 0; i < data_from_db.participants.length; i++){
+          var participant = Object.values(data_from_db.participants)[i]
+          memberNodes.push(
+        { id: participant.id, 
+          image: 'http://127.0.0.1:8887/' + participant.photo_file, 
+          shape:'circularImage',
+          size:30, 
+          label: 'Member', 
+          hidden: true, 
+          nodeType: 'teamMember',
+          color: {
+            background: memberColor,
+            border: edgesColor,
+          },
+          name: participant.name,
+          title: participant.name,
+          description: participant.description,
+          academic_title: participant.academic_title
+        });
+      }
+    }
+    else if(view==='courses'){
+      for (let i = 0; i < data_from_db.courses.length; i++){
+        var course = Object.values(data_from_db.courses)[i]
+          viewTypeNodes.push(
+            { id: course.id, 
+              shape: pubShape,
+              size:30, 
+              label: 'Course', 
+              hidden: true, 
+              nodeType: 'publication', 
+              color: {
+                background: pubColor,
+                border: edgesColor
+              }, 
+              name: course.name,
+              title: course.name,
+              year: course.year,
+              link: course['link'], 
+              description: course.description
+            });
+        }
+        for (let i = 0; i < data_from_db.coteachers.length; i++){
+          var teacher = Object.values(data_from_db.coteachers)[i]
+          memberNodes.push(
+        { id: teacher.id, 
+          image: 'http://127.0.0.1:8887/' + teacher.photo_file, 
+          shape:'circularImage',
+          size:30, 
+          label: 'Member', 
+          hidden: true, 
+          nodeType: 'teamMember',
+          color: {
+            background: memberColor,
+            border: edgesColor,
+          },
+          name: teacher.name,
+          title: teacher.name,
+          description: teacher.description,
+          academic_title: teacher.academic_title
+        });
+      }
+    }
+    if(view){
+    for (let i = 0; i < data_from_db.areas.length; i++){
+      var area = Object.values(data_from_db.areas)[i]
+      areaOfResearchNodes.push(
+        { id: area.id, 
+          name: area.name,
+          title: area.name,
+          description: area.description,
+          shape: areaShape,
+          size:30, 
+          label: 'Area \nof research', 
+          hidden: true, 
+          nodeType: 'areaOfResearch', 
+          color: {
+            background: areaOfResearchColor,
+            border: edgesColor
+          } 
+        });
+        connections.push({from: 12, to: area.id});;
+    }
+    
+    for (let i = 0; i < data_from_db.connections.length; i++){
+      connections.push(JSON.parse(data_from_db.connections[i]));
+    }}
+  }
+  prepare_graph_data(chosen_view);
   
-  var edges1 =  new DataSet([
-    { from: 3, to: 2 },
-    { from: 1, to: 2 },
-    { from: 2, to: 4 },
-    { from: 2, to: 5 },
-    { from: 7, to: 2 },
-    { from: 6, to: 2 }
-  ]);
+
+  var nodes = new DataSet(memberNodes.concat(areaOfResearchNodes, viewTypeNodes));
+  console.log('polaczone przeszly');
+  console.log(connections);
+
+  var edges =  new DataSet(connections);
   
   const options = {
       nodes:
       { 
         shadow: {
             size: 40,
-          color: shadowColor},
-        borderWidth:8,
-        // borderWidthSelected: function (borderWidth) {return borderWidth*3;},
+            color: shadowColor},
+            borderWidth:8,
             size:50,
             color: {
             highlight: highlightColor,
@@ -189,25 +272,18 @@ description: "Antoni Ligęza"},
         }
       },
       interaction:
-    {  hover:
+    {   hover:
         true,
         hoverConnectedEdges: false
     }
   };
 
-  // function getNodeById(id) {
-  //   return nodes.filter(
-  //     function(nodes) {
-  //       return nodes.id == id
-  //     }
-  //   );
-  // }
 
   function changeLogoColor(nodesArray, color){
     if(color === 'gray'){
-      nodesArray[0].image = 'http://127.0.0.1:8887/logo_szare.png';
+      nodesArray[12].image = 'http://127.0.0.1:8887/logo_gray.png';
     }else{
-      nodesArray[0].image = 'http://127.0.0.1:8887/logo_wyciete_new.png';
+      nodesArray[12].image = 'http://127.0.0.1:8887/logo.png';
       }
     }
   
@@ -225,7 +301,7 @@ description: "Antoni Ligęza"},
 
       //expanding neihbour nodes
       for(const node of nodesToHide.get({fields: ['id', 'hidden']})){
-        if(node.id === 0) continue;
+        if(node.id === 12) continue;
         if(node.hidden !== false) {
           nodesCopy.push({id: node.id, hidden: !node.hidden}); 
         }
@@ -261,7 +337,7 @@ description: "Antoni Ligęza"},
             allNodes[connectedNodes[i]].hiddenLabel = undefined;
           }
           // selected node label
-          if(connectedNodes[i] === 0 || selectedNode === 0){
+          if(connectedNodes[i] === 12 || selectedNode === 12){
             changeLogoColor(allNodes, 'blue');
           }
           
@@ -292,46 +368,6 @@ description: "Antoni Ligęza"},
       nodes.update(updateArray);
       }
       else{
-        //****           TODO: something is no yes with first time highlighting if neighbours!=0      ***
-      //   if(highlightActive === true){
-      //     for (var nodeId in allNodes) {
-      //       var typeColor = nodeTypeColors[allNodes[nodeId].nodeType] 
-      //       allNodes[nodeId].color = {background: typeColor,border: typeColor};
-      //       if (allNodes[nodeId].hiddenLabel !== undefined) {
-      //         allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
-      //         allNodes[nodeId].hiddenLabel = undefined;
-      //       }
-      //     }
-      //     highlightActive = false;
-      //   }else{
-      //     for (var nodeId in allNodes) {
-      //       //alert(JSON.stringify(allNodes[nodeId]));
-      //       //unselect everything
-      //       if(!idsArray.includes(nodeId)){
-      //       allNodes[nodeId].color = {background: edgesColor,border: edgesColor};
-  
-      //       if (allNodes[nodeId].hiddenLabel === undefined) {
-      //         allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
-      //         allNodes[nodeId].label = undefined;
-      //       }
-      //     }else{
-      //       for (var neighId in idsArray) {
-      //         var typeColor = nodeTypeColors[allNodes[neighId].nodeType] 
-      //         allNodes[neighId].color = {background: typeColor, border: typeColor};
-      //         if (allNodes[neighId].hiddenLabel !== undefined) {
-      //           allNodes[neighId].label = allNodes[neighId].hiddenLabel;
-      //           allNodes[neighId].hiddenLabel = undefined;
-      //         }
-      //         // selected node label
-              
-      //       }
-
-      //     }
-      //     allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
-      //     allNodes[selectedNode].hiddenLabel = undefined;
-      //     }
-      //     highlightActive = true;
-      //   }
         nodes.update(nodesCopy);
       }
   }
@@ -342,7 +378,9 @@ description: "Antoni Ligęza"},
       new Network(domNode.current, { nodes, edges }, options);
   }
   , [domNode, network, nodes, edges]);
+
   useEffect(() => {
+
     network.current.on("click", function(e) { 
       var clickedId = nodes.get(e.nodes[0]).id;
 
@@ -394,7 +432,7 @@ description: "Antoni Ligęza"},
       var clickedId = nodes.get(e.nodes[0]).id;
       if(currFocusedNode !== clickedId 
         && currFocusedNode!==undefined){
-      if(clickedId !== 0){
+      if(clickedId !== 12){
         var opt = {
           scale: 2.0,
           animation: {
@@ -411,34 +449,28 @@ description: "Antoni Ligęza"},
         duration: 1000
       },
     };
-    network.current.focus(0, opt2); 
+    network.current.focus(12, opt2); 
     currFocusedNode = 2; 
   }
   });
-
-  // network.current.on("showPopup", function(e){
-  //   // functionality for popup to show on mouseover
-  //   var allNodes = nodes.get({ returnType: "Object" });
-  //   //var clickedId = nodes.get(e.nodes[0]).id;
-
-  //   var descriptionElement = document.createElement("div");
-  //   descriptionElement.style.border = "1px solid gray";
-  //   descriptionElement.style.height = "10em";
-  //   descriptionElement.style.width = "10em";
-  //   var descriptionElementInner = document.createElement("div");
-  //   descriptionElementInner.innerHTML = allNodes[clickedId].description
-  //   descriptionElement.appendChild(descriptionElementInner);
-
-
-  //   nodes.update({id: clickedId, description: descriptionElement})
-  // });
   
   network.current.on("hoverNode",function (e) {
     var allNodes = nodes.get({ returnType: "Object" });
 
-    //console.log(allNodes[e.node].description);
+    document.getElementsByClassName("text-content")[0].innerHTML='';
     var description = (allNodes[e.node].description === undefined) ? "" : allNodes[e.node].description;
-    document.getElementsByClassName("text-content")[0].innerHTML = description;
+    document.getElementsByClassName("text-content")[0].innerHTML=description;
+
+    // var ptag1 = document.createElement("p");
+    // ptag1.innerHTML = description;
+    // var ptag = document.createElement("p");
+    // ptag.innerHTML = allNodes[e.node].name;
+    // var atag = document.createElement("a");
+    // atag.href = allNodes[e.node].link;
+    // atag.innerHTML = 'Link';
+    // document.getElementsByClassName("text-content")[0].appendChild(ptag);
+    // document.getElementsByClassName("text-content")[0].appendChild(atag);
+    // document.getElementsByClassName("text-content")[0].appendChild(ptag1);
 });
 
 
